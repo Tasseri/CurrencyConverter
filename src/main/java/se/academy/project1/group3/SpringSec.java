@@ -37,7 +37,7 @@ public class SpringSec {
     @Autowired
     Repository repository;
 
-    @GetMapping("/log")
+    @PostMapping("/login")
     public String form() {
         return "login";
     }
@@ -51,11 +51,11 @@ public class SpringSec {
         return "login";
     }
 
-    @PostMapping("/login")
+    @PostMapping("/loginForm")
     public String submit(HttpSession session, @RequestParam String username, @RequestParam String password) {
         if (repository.loginUser(username, password) ) {
             session.setAttribute("user", username);
-            return "secret";
+            return "redirect:/";
         }
         return "login";
     }
@@ -68,5 +68,15 @@ public class SpringSec {
             return new ModelAndView("secret");
         }
         return new ModelAndView("login");
+    }
+
+    @GetMapping("/headerIndex")
+    public ModelAndView hi (HttpSession session) {
+        if (session.getAttribute("user") != null) {
+            ModelAndView modelAndView = new ModelAndView("header");
+            modelAndView.addObject("logged", session.getAttribute("user"));
+            return modelAndView;
+        }
+        return new ModelAndView("headerIndex");
     }
 }
