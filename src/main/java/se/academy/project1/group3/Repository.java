@@ -1,5 +1,6 @@
 package se.academy.project1.group3;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -8,5 +9,6 @@ import java.util.List;
 public interface Repository {
     void addTransaction(long userID, String currencyFrom, String currencyTo, long amount, long result);
     List<Transaction> listTransactions();
-
+    void addUser(String firstName, String lastName, String username, String password);
+    boolean loginUser(String username, String password);
 }
