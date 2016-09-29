@@ -7,9 +7,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.sql.DataSource;
-import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,61 +15,28 @@ import java.util.List;
 
 @Controller
 public class Controllers {
-
     @Autowired
-    DataSource dataSource;
+    Repository rep;
 
-    double usdSek = 1.50;
+    @RequestMapping(method = RequestMethod.GET, path = "/top5")
+    public ModelAndView top5() {
+        ModelAndView modelAndView = new ModelAndView("top5");
 
-    @RequestMapping(method = RequestMethod.GET, path = "/converter")
-    public ModelAndView convert(@RequestParam long amount, @RequestParam String from, @RequestParam String to) {
-        ModelAndView modelAndView = new ModelAndView("converter");
-        modelAndView.addObject("amount", amount)
-                    .addObject("from", from)
-                    .addObject("to", to);
-        modelAndView.addObject("result", "" + usdSek);
+        List<Transaction> trans = rep.listTransactions();
+        modelAndView.addObject("trans", trans);
         return modelAndView;
     }
 
-
-    public void addTransaction(long userID, String currencyFrom, String currencyTo, long amount, long result){
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement ps = conn.prepareStatement("INSERT INTO Transactions (User_ID, CurrencyFrom, CurrencyTo, Amount, Result) " +
-                     "VALUES (?,?,?, ?, ?)")) {
-                ps.setLong(1, userID);
-                ps.setString(2, currencyFrom);
-                ps.setString(3, currencyTo);
-                ps.setLong(4, amount);
-                ps.setLong(5, result);
-            try {
-                ps.executeUpdate();
-            }catch (SQLException e){
-                System.out.println(e);
-                //OBS! Check this!
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-            //OBS! Check???
-        }
-    }//End addTransaction
-
-    public List<Transaction> listTransactions() {
-        try (Connection conn = dataSource.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT TOP (5) FROM Transactions ORDER BY Date DESC")) {
-            List<Transaction> transactions = new ArrayList<>();
-            while (rs.next()) transactions.add(rsTransaction(rs));
-                return transactions;
-        } catch (SQLException e) {
-            //OBS check Exceptionhandeler!
-            throw new RuntimeException();
-        }
+    @RequestMapping(method = RequestMethod.GET, path = "/createUser")
+    public ModelAndView createUser () {
+        ModelAndView modelAndView = new ModelAndView("createUser");
+        return modelAndView;
     }
-
-    private Transaction rsTransaction(ResultSet rs) throws SQLException {
-        return new Transaction(rs.getLong("TransID"), rs.getLong("User_ID"),
-                rs.getString("CurrencyFrom"), rs.getString("CurrencyTo"),
-                rs.getLong("Amount"), rs.getLong("Result"), rs.getTimestamp("Date").toLocalDateTime());
+    @RequestMapping(method = RequestMethod.POST, path = "/addUser")
+    public ModelAndView addUser (@RequestParam String firstName, @RequestParam String lastName,
+                                 @RequestParam String username, @RequestParam String password) {
+        rep.addUser(firstName,lastName,username,password);
+        ModelAndView modelAndView = new ModelAndView("success");
+        return modelAndView;
     }
-
 }

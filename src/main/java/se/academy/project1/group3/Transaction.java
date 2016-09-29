@@ -7,13 +7,13 @@ import java.time.LocalDateTime;
  */
 public class Transaction {
 
-    public final long transId;
-    public final long userId;
-    public final String currencyFrom;
-    public final String currencyTo;
-    public final long amount;
-    public final long result;
-    public final LocalDateTime date;
+    private final long transId;
+    private final long userId;
+    private final String currencyFrom;
+    private final String currencyTo;
+    private final long amount;
+    private final long result;
+    private final LocalDateTime date;
 
     public Transaction(long transId, long userId, String currencyFrom, String currencyTo, long amount, long result, LocalDateTime date) {
         this.transId = transId;
@@ -25,5 +25,31 @@ public class Transaction {
         this.date = date;
     }
 
+    public long getTransId() {
+        return transId;
+    }
 
+    public long getUserId() {
+        return userId;
+    }
+
+    public String getCurrencyFrom() {
+        return currencyFrom;
+    }
+
+    public String getCurrencyTo() {
+        return currencyTo;
+    }
+
+    public long getAmount() {
+        return amount;
+    }
+
+    public long getResult() {
+        return result;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
 }

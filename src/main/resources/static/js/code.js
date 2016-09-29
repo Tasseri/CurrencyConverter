@@ -52,7 +52,7 @@ $(document).ready(function() {
                 USD = accounting.formatMoney(USD, "$ ", 2, ",", ".");
                 console.log(USD);
 
-                $("ul.currencies").append("<li>USD estimate: " + USD + "</li>");
+                $("ul.currencies").append("<li> " + " " + fto+  " estimate: " + USD + "</li>");
 
             }
         );
