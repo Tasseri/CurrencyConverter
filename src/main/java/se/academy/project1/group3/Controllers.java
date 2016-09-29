@@ -26,4 +26,17 @@ public class Controllers {
         modelAndView.addObject("trans", trans);
         return modelAndView;
     }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/createUser")
+    public ModelAndView createUser () {
+        ModelAndView modelAndView = new ModelAndView("createUser");
+        return modelAndView;
+    }
+    @RequestMapping(method = RequestMethod.POST, path = "/addUser")
+    public ModelAndView addUser (@RequestParam String firstName, @RequestParam String lastName,
+                                 @RequestParam String username, @RequestParam String password) {
+        rep.addUser(firstName,lastName,username,password);
+        ModelAndView modelAndView = new ModelAndView("success");
+        return modelAndView;
+    }
 }
