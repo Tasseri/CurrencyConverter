@@ -40,7 +40,7 @@ public class SqlRepository implements Repository {
     public List<Transaction> listTransactions() {
         try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT TOP (5) * FROM Transactions ORDER BY Date DESC")) {
+             ResultSet rs = stmt.executeQuery("SELECT TOP (5) T.TransID, U.FirstName, U.LastName, U.UserName, T.CurrencyFrom, T.CurrencyTo, T.Amount, T.Result, T.Date FROM Transactions as T INNER JOIN Users as U ON T.User_ID = U.UserID ORDER BY T.Date DESC")) {
             List<Transaction> transactions = new ArrayList<>();
             while (rs.next()) transactions.add(rsTransaction(rs));
             return transactions;
@@ -91,7 +91,8 @@ public class SqlRepository implements Repository {
     }
 
     private Transaction rsTransaction(ResultSet rs) throws SQLException {
-        return new Transaction(rs.getLong("TransID"), rs.getLong("User_ID"),
+        return new Transaction(rs.getLong("TransID"), rs.getString("FirstName"),
+                rs.getString("LastName"),rs.getString("UserName"),
                 rs.getString("CurrencyFrom"), rs.getString("CurrencyTo"),
                 rs.getLong("Amount"), rs.getLong("Result"), rs.getTimestamp("Date").toLocalDateTime());
     }

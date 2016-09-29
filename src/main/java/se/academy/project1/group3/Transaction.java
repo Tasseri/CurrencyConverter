@@ -8,16 +8,20 @@ import java.time.LocalDateTime;
 public class Transaction {
 
     private final long transId;
-    private final long userId;
+    private final String firstName;
+    private final String lastName;
+    private final String userName;
     private final String currencyFrom;
     private final String currencyTo;
     private final long amount;
     private final long result;
     private final LocalDateTime date;
 
-    public Transaction(long transId, long userId, String currencyFrom, String currencyTo, long amount, long result, LocalDateTime date) {
+    public Transaction(long transId, String firstName, String lastName, String userName, String currencyFrom, String currencyTo, long amount, long result, LocalDateTime date) {
         this.transId = transId;
-        this.userId = userId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userName = userName;
         this.currencyFrom = currencyFrom;
         this.currencyTo = currencyTo;
         this.amount = amount;
@@ -29,8 +33,16 @@ public class Transaction {
         return transId;
     }
 
-    public long getUserId() {
-        return userId;
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getUserName() {
+        return userName;
     }
 
     public String getCurrencyFrom() {
