@@ -7,7 +7,7 @@
 
 
 $(document).ready(function() {
-    $('#Submit').click(function (e) {
+    $('#submit').click(function (e) {
         e.preventDefault();
         var ffrom = document.f.from.value;
         var amount = document.f.amount.value;
