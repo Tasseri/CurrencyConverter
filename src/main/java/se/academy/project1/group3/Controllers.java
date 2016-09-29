@@ -29,15 +29,6 @@ public class Controllers {
         return modelAndView;
     }
 
-/*    @RequestMapping(value = "/xxx.mvc", method=RequestMethod.POST)
-    @ResponseBody
-    public Map<String, Object> getValues(@RequestBody Map<String, Object> pvmValues, final HttpServletRequest request, final HttpServletResponse response) {
-        long var = (long)pvmValues.get("result").toString();
-        System.out.println(pvmValues.get("result"));
-        System.out.println("Wazzup");
-        return pvmValues;
-    }*/
-
     @RequestMapping(value = "/xxx.mvc", method=RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> getValues(@RequestBody Map<String, Object> pvmValues, final HttpServletRequest request, final HttpServletResponse response) {
@@ -48,7 +39,6 @@ public class Controllers {
         String to = pvmValues.get("to").toString();
         System.out.println(result);
         rep.addTransaction(userId, from, to, amount, result);
-        //rep.addTransaction(1, "asd", "asd", 150, 157);
         System.out.println(result);
         System.out.println("Wazzup");
         return pvmValues;
