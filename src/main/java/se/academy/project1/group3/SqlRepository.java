@@ -29,12 +29,11 @@ public class SqlRepository implements Repository {
             try {
                 ps.executeUpdate();
             }catch (SQLException e){
-                System.out.println(e);
+                throw new CurrencyConverterException(e);
                 //OBS! Check this!
             }
         } catch (SQLException e) {
-            System.out.println(e);
-            //OBS! Check???
+            throw new CurrencyConverterException(e);
         }
     }//End addTransaction
 
@@ -46,8 +45,26 @@ public class SqlRepository implements Repository {
             while (rs.next()) transactions.add(rsTransaction(rs));
             return transactions;
         } catch (SQLException e) {
-            //OBS check Exceptionhandeler!
-            throw new RuntimeException(e);
+            throw new CurrencyConverterException(e);
+        }
+    }
+
+    @Override
+    public void addUser(String firstName, String lastName, String username, String password) {
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("INSERT INTO Users (FirstName, LastName, Username, PasswordHash) " +
+                     "VALUES (?,?,?,HASHBYTES('SHA2_512', ?))")) {
+            ps.setString(1, firstName);
+            ps.setString(2, lastName);
+            ps.setString(3, username);
+            ps.setString(4, password);
+            try {
+                ps.executeUpdate();
+            }catch (SQLException e){
+                throw new CurrencyConverterException(e);
+            }
+        } catch (SQLException e) {
+            throw new CurrencyConverterException(e);
         }
     }
 
