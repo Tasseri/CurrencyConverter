@@ -10,4 +10,5 @@ public interface Repository {
     void addTransaction(long userID, String currencyFrom, String currencyTo, long amount, long result);
     List<Transaction> listTransactions();
     void addUser(String firstName, String lastName, String username, String password);
+    boolean loginUser(String username, String password);
 }
