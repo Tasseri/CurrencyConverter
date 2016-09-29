@@ -1,11 +1,19 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
+    <link rel="STYLESHEET" href="stylesheet.css"/>
     <title>Title</title>
 </head>
 <body>
-<ul th:each="tran : ${trans}">
-    <li th:text="${tran.transId}"></li>
+<h1>Latest Transactions:</h1>
+<ul  th:each="tran : ${trans}">
+    <li>Trans-id: <span th:text="${tran.transId}"></span>. &nbsp;Name: <span th:text="${tran.firstName}"></span>
+        <span th:text="${tran.lastName}"></span>. &nbsp;Username: <span th:text="${tran.userName}"></span>.
+        &nbsp;From: <span th:text="${tran.currencyFrom}"></span>.  &nbsp;To: <span th:text="${tran.currencyTo}"></span>.
+        &nbsp;Amount: <span th:text="${tran.amount}"></span>.  &nbsp;Result: <span th:text="${tran.result}"></span>.
+        &nbsp;Date: <span th:text="${tran.date}"></span>.
+
+    </li>
 </ul>
 </body>
 </html>
