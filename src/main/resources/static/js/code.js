@@ -4,26 +4,26 @@
 
 
 
-
+var result;
 
 $(document).ready(function() {
     $('#submit').click(function (e) {
         e.preventDefault();
+        var dictController = {};
+
         var ffrom = document.f.from.value;
         var amount = document.f.amount.value;
         var fto = document.f.to.value;
+        var result = document.f.result.value;
 
         fx.base = ffrom;
         fx.settings = {
             from: "EUR"
         };
         fx.settings.from = ffrom;
-        /*            console.log(fx.base);
-         console.log(fx.settings.from);
-         console.log(ffrom);*/
-        ; //in SolidShops, you could use: {{ product.price }}
-        // Load exchange rates data via the cross-domain/AJAX proxy:
-        console.log("blabla");
+
+
+
         $.getJSON(
             'https://openexchangerates.org/api/latest.json?app_id=226bf2bab8cd4bb29863c5cf86be73fb',
             function (data) {
@@ -45,21 +45,46 @@ $(document).ready(function() {
 
                 Inobject.to = fto;
                 console.log(fto);
-                var USD = fx.convert(amount, Inobject); //13.22784197768393
+                result = fx.convert(amount, Inobject); //13.22784197768393
+                dictController.result = "" + Math.round(result * 100) / 100
 
 
                 // we can now use the accounting.js library to format the numbers properly
-                USD = accounting.formatMoney(USD, "$ ", 2, ",", ".");
-                console.log(USD);
+                result = accounting.formatMoney(result, " ", 2, ",", ".");
 
-                $("ul.currencies").append("<li> " + " " + fto+  " estimate: " + USD + "</li>");
+
+                console.log(result);
+
+
+                $("ul.currencies").append("<li> " + " " + fto+  " estimate: " + result + "</li>");
+
+                console.log(result);
+                dictController.from = ffrom;
+                dictController.to = fto;
+
+                dictController.amount = amount;
+                console.log(dictController);
+
+
+                $.ajax({
+                    type : 'POST',
+                    url : 'xxx.mvc',
+                    data : JSON.stringify(dictController),
+                    error : function(response) {
+                        alert("Operation failed.");
+                    },
+                    success : function(response) {
+                        alert("Success");
+                    },
+                    contentType : "application/json",
+                    dataType : "json"
+                });
+
 
             }
         );
 
-        /*
-         console.log(Inobject);
-         */
+
 
 
     });
