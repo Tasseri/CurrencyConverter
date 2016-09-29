@@ -4,7 +4,7 @@
 </head>
 <body style="margin-left: 6px; min-width: 0px;">
 <div class=g-doc>
-    <form action="converter" method="get" name="f">
+    <form action="index.html" method="get" name="f">
         <div class=sfe-break-top>
             <input name=amount maxlength=12 size=5 autocomplete=off value="1">
         </div>
@@ -359,9 +359,89 @@
         </div>
         &nbsp;
         <div id=currency_converter_result>
-            <input type=submit value="Convert">
+            <input id="Submit" type=submit value="Convert"> <!--onClick="pass();">-->
         </div>
     </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+    <script src="http://openexchangerates.github.io/money.js/money.js"></script>
+    <script src="js/accounting.js"></script>
+    <script src="js/code.js"></script>
+<!--    <script>
+    var ffrom;
+    var fto;
+    var Inobject = {};
+    function pass() {
+        ffrom = document.f.from.value;
+
+        fto = document.f.to.value;
+        console.log(ffrom);
+        console.log(fto);
+        /*        var obj = {};
+        obj.fto = fto;
+        obj.ffrom = ffrom;
+        return obj;*/
+
+
+
+
+
+
+        fx.base = "EUR";
+        fx.settings = {
+            from: "EUR"
+        };
+        /*            console.log(fx.base);
+            console.log(fx.settings.from);
+            console.log(ffrom);*/
+            var amount = 9.99; //in SolidShops, you could use: {{ product.price }}
+            // Load exchange rates data via the cross-domain/AJAX proxy:
+            console.log("blabla");
+
+            $.getJSON(
+                    'https://openexchangerates.org/api/latest.json?app_id=226bf2bab8cd4bb29863c5cf86be73fb',
+                    function (data) {
+                        // Check money.js has finished loading:
+                        if (typeof fx !== "undefined" && fx.rates) {
+                            fx.rates = data.rates;
+                            fx.base = data.base;
+                            console.log("sucess");
+                        } else {
+                            console.log("fail load json");
+                            var fxSetup = {
+                                rates: data.rates,
+                                base: data.base
+                            }
+                        }
+
+                        // now that we have exchange rates, add a few to our page
+                        var Inobject = {};
+
+                        Inobject.to = "USD";
+                        console.log(fto);
+                        var USD = fx.convert(amount, {to: "USD"}); //13.22784197768393
+
+
+                        // we can now use the accounting.js library to format the numbers properly
+                        USD = accounting.formatMoney(USD, "$ ", 2, ",", ".");
+                        console.log(USD);
+
+                        $("ul.currencies").append("<li>USD estimate: " + USD + "</li>");
+
+                    }
+            );
+
+            console.log(Inobject);
+
+    };
+
+
+
+
+    // ]]></script>-->
+
+
+    <ul class="currencies"></ul>
 </body>
+226bf2bab8cd4bb29863c5cf86be73fb
 </div>
 </html>
