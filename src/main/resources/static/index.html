@@ -4,6 +4,7 @@
     <link rel="STYLESHEET" href="stylesheet.css"/>
 </head>
 <body>
+<div class="header"><iframe src="headerIndex"></iframe></div>
 <div id="main">
     <form action="converter" method="get" name="f" class="theForm">
         <ul class="flex-outer">
@@ -360,6 +361,7 @@
             <li>
                 <label for="inputBox">Amount:</label>
                 <input id="inputBox" name=amount maxlength=12 size=5 autocomplete=off value="1">
+                <input id="hiddenInput" name=result type="hidden">
             </li>
             <li id=currency_converter_result>
                 <input type=submit id="submit" class="submit" value="Convert"/>

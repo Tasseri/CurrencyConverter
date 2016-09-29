@@ -68,6 +68,28 @@ public class SqlRepository implements Repository {
         }
     }
 
+    @Override
+    public boolean loginUser(String username, String password) {
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT *" +
+                     "FROM Users "+
+                     "WHERE ? = Users.username AND HASHBYTES('SHA2_512', ?) = Users.passwordHash")) {
+            ps.setString(1, username);
+            ps.setString(2, password);
+            try {
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    return true;
+                }
+                return false;
+            }catch (SQLException e){
+                throw new CurrencyConverterException(e);
+            }
+        } catch (SQLException e) {
+            throw new CurrencyConverterException(e);
+        }
+    }
+
     private Transaction rsTransaction(ResultSet rs) throws SQLException {
         return new Transaction(rs.getLong("TransID"), rs.getString("FirstName"),
                 rs.getString("LastName"),rs.getString("UserName"),
