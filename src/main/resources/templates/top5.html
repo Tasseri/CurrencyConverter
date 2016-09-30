@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
+<div class="header"></div>
 <h1>Latest Transactions:</h1>
 <ul  th:each="tran : ${trans}">
     <li>Trans-id: <span th:text="${tran.transId}"></span>. &nbsp;Name: <span th:text="${tran.firstName}"></span>
@@ -15,5 +16,7 @@
 
     </li>
 </ul>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+<script src="js/header.js"></script>
 </body>
 </html>

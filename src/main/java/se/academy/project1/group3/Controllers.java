@@ -55,4 +55,9 @@ public class Controllers {
         ModelAndView modelAndView = new ModelAndView("success");
         return modelAndView;
     }
+
+    @GetMapping("/main")
+    public String index() {
+        return "redirect:/";
+    }
 }
