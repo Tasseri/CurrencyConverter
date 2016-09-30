@@ -1,9 +1,10 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Header</title>
 </head>
 <body>
-<div th:text="${logged}"></div><div></div>
+<form action="logout" method="post">
+    <span for="logOut" th:text="${logged}"></span>
+    <button id="logOut" type="submit" class="headSubmit">Log out!</button>
+</form>
 </body>
 </html>

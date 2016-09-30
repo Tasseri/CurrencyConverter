@@ -42,13 +42,13 @@ public class SpringSec {
         return "login";
     }
 
-    @GetMapping("/logout")
+    @PostMapping("/logout")
     public String logout(HttpSession session, HttpServletResponse res) {
         session.invalidate();
         Cookie cookie = new Cookie("jsessionid", "");
         cookie.setMaxAge(0);
         res.addCookie(cookie);
-        return "login";
+        return "redirect:/";
     }
 
     @PostMapping("/loginForm")
@@ -58,16 +58,6 @@ public class SpringSec {
             return "redirect:/";
         }
         return "login";
-    }
-
-    @GetMapping("/secret")
-    public ModelAndView secret(HttpSession session) {
-
-        //session.setAttribute("user", );
-        if (session.getAttribute("user") != null) {
-            return new ModelAndView("secret");
-        }
-        return new ModelAndView("login");
     }
 
     @GetMapping("/headerIndex")
