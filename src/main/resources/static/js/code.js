@@ -71,10 +71,10 @@ $(document).ready(function() {
                     url : 'xxx.mvc',
                     data : JSON.stringify(dictController),
                     error : function(response) {
-                        alert("Operation failed.");
+                        console.log("MVC Operation failed.");
                     },
                     success : function(response) {
-                        alert("Success");
+                        console.log("successfully called MVC");
                     },
                     contentType : "application/json",
                     dataType : "json"
