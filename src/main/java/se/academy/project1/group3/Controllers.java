@@ -55,4 +55,16 @@ public class Controllers {
         ModelAndView modelAndView = new ModelAndView("success");
         return modelAndView;
     }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/topTrans")
+    public ModelAndView topTrans() {
+        ModelAndView modelAndView = new ModelAndView("topTrans");
+
+        List<TopTransaction> trans = rep.topTransactions();
+        modelAndView.addObject("trans", trans);
+        return modelAndView;
+    }
+
+
+
 }

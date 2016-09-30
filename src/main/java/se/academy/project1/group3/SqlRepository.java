@@ -49,6 +49,18 @@ public class SqlRepository implements Repository {
         }
     }
 
+    public List<TopTransaction> topTransactions() {
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT COUNT(*) as Number, U.UserName FROM Transactions AS T INNER JOIN Users as U ON T.User_ID = U.UserID WHERE T.User_ID IN (SELECT User_ID FROM Transactions AS Tr) GROUP BY U.UserName ORDER BY Number DESC")) {
+            List<TopTransaction> transactions = new ArrayList<>();
+            while (rs.next()) transactions.add(rsTopTransaction(rs));
+            return transactions;
+        } catch (SQLException e) {
+            throw new CurrencyConverterException(e);
+        }
+    }
+
     @Override
     public void addUser(String firstName, String lastName, String username, String password) {
         try (Connection conn = dataSource.getConnection();
@@ -96,4 +108,9 @@ public class SqlRepository implements Repository {
                 rs.getString("CurrencyFrom"), rs.getString("CurrencyTo"),
                 rs.getLong("Amount"), rs.getLong("Result"), rs.getTimestamp("Date").toLocalDateTime());
     }
+
+    private TopTransaction rsTopTransaction(ResultSet rs) throws SQLException {
+        return new TopTransaction(rs.getLong("Number"), rs.getString("UserName"));
+    }
+
 }
