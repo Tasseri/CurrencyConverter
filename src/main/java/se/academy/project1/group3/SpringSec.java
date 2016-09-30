@@ -37,12 +37,12 @@ public class SpringSec {
     @Autowired
     Repository repository;
 
-    @PostMapping("/login")
+    @GetMapping("/login")
     public String form() {
         return "login";
     }
 
-    @PostMapping("/logout")
+    @GetMapping("/logout")
     public String logout(HttpSession session, HttpServletResponse res) {
         session.invalidate();
         Cookie cookie = new Cookie("jsessionid", "");
