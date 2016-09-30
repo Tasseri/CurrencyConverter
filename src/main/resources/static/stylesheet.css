@@ -9,17 +9,18 @@ body {
     padding: 0;
 }
 
-.flex-outer {
+.flex-outer, .currencies {
     max-width: 800px;
     margin: 0 auto;
 }
 
-.flex-outer li {
+.flex-outer li, .currencies li {
     display: flex;
     flex-wrap: wrap;
 }
 
-.flex-outer > li:not(:last-child) {
+.flex-outer > li:not(:last-child)
+, .currencies > li:not(:last-child) {
     margin-bottom: 20px;
 }
 
@@ -41,12 +42,8 @@ body {
     flex: 1 0 220px;
 }
 
-.flex-outer li p {
-    margin: 0;
-}
-
 .flex-outer li input:not([type='checkbox']),
-.flex-outer li textarea {
+.flex-outer li textarea, .currencies {
     padding: 15px;
     border: none;
     border-radius: 20px;
@@ -101,4 +98,10 @@ select {
 .logo img {
     width: 30px;
     margin-right: 10px;
+}
+.currencies {
+    display: flex;
+    flex-direction: column;
+    border: solid thick;
+    max-width: 400px;
 }
