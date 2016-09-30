@@ -2,7 +2,6 @@ body {
     font: normal 18px/1.5 "Fira Sans", "Helvetica Neue", sans-serif;
     background: #3AAFAB;
     color: #fff;
-    padding: 50px 0;
 }
 
 .flex-outer {
@@ -54,7 +53,7 @@ body {
     padding-left: 25%
 }
 
-.submit{
+.submit, .headSubmit {
     margin-left: auto;
     padding: 4% 8%;
     border: none;
@@ -74,4 +73,12 @@ body {
 select {
     border-radius: 20px;
     padding-left: 8%
+}
+.button {
+    appearance: button;
+    text-decoration: none;
+}
+.headSubmit{
+    padding: 2% 4%;
+    font-size: 50%;
 }
