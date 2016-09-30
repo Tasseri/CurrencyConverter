@@ -27,7 +27,6 @@ $(document).ready(function() {
         $.getJSON(
             'https://openexchangerates.org/api/latest.json?app_id=226bf2bab8cd4bb29863c5cf86be73fb',
             function (data) {
-                // Check money.js has finished loading:
                 if (typeof fx !== "undefined" && fx.rates) {
                     fx.rates = data.rates;
                     fx.base = data.base;
@@ -40,23 +39,20 @@ $(document).ready(function() {
                     }
                 }
 
-                // now that we have exchange rates, add a few to our page
                 var Inobject = {};
 
                 Inobject.to = fto;
-                console.log(fto);
-                result = fx.convert(amount, Inobject); //13.22784197768393
+
+                result = fx.convert(amount, Inobject);
                 dictController.result = "" + Math.round(result * 100) / 100
 
-
-                // we can now use the accounting.js library to format the numbers properly
                 result = accounting.formatMoney(result, " ", 2, ",", ".");
 
 
                 console.log(result);
 
 
-                $("ul.currencies").append("<li> " + " " + fto+  " estimate: " + result + "</li>");
+                $("ul.currencies").append("<li>" +  ffrom + " ->" + " " + fto+  " estimate: " + result + "</li>");
 
                 console.log(result);
                 dictController.from = ffrom;
