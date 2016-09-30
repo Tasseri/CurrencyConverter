@@ -2,11 +2,17 @@
 <head>
 </head>
 <body>
-<form action="logout" method="post">
-    <a class="button submit" th:href="@{/gethistory(username=${logged})}">History User</a>
-
-    <span for="logOut" th:text="${logged}"></span>
-    <button id="logOut" type="submit" class="headSubmit">Log out!</button>
-</form>
+<div class="headMain">
+    <div>
+        <a href="main" class="logo"><img src="krona.jpg"/></a>
+        <span th:text="${logged}"></span>
+    </div>
+    <div>
+        <a class="button headSubmit" th:href="@{/gethistory(username=${logged})}">History User</a>
+    </div>
+    <div>
+        <a href="logout" class="button headSubmit">Log out!</a>
+    </div>
+</div>
 </body>
 </html>
