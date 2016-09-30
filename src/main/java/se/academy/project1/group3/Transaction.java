@@ -5,17 +5,21 @@ import java.time.LocalDateTime;
 /**
  * Created by Administrator on 2016-09-28.
  */
+
+
 public class Transaction {
 
-    private final long transId;
-    private final String firstName;
-    private final String lastName;
-    private final String userName;
-    private final String currencyFrom;
-    private final String currencyTo;
-    private final long amount;
-    private final long result;
-    private final LocalDateTime date;
+    private  long transId;
+    private  String firstName;
+    private  String lastName;
+    private  String userName;
+    private  String currencyFrom;
+    private  String currencyTo;
+    private  long amount;
+    private  long result;
+    private  LocalDateTime date;
+
+    private long number;
 
     public Transaction(long transId, String firstName, String lastName, String userName, String currencyFrom, String currencyTo, long amount, long result, LocalDateTime date) {
         this.transId = transId;
@@ -27,6 +31,12 @@ public class Transaction {
         this.amount = amount;
         this.result = result;
         this.date = date;
+
+    }
+
+    public Transaction(long number, String userName) {
+        this.number = number;
+        this.userName = userName;
     }
 
     public long getTransId() {
@@ -64,4 +74,9 @@ public class Transaction {
     public LocalDateTime getDate() {
         return date;
     }
+
+    public long getNumber() {
+        return number;
+    }
+
 }

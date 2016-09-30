@@ -71,7 +71,7 @@ public class Controllers {
     public ModelAndView topTrans() {
         ModelAndView modelAndView = new ModelAndView("topTrans");
 
-        List<TopTransaction> trans = rep.topTransactions();
+        List<Transaction> trans = rep.topTransactions();
         modelAndView.addObject("trans", trans);
         return modelAndView;
     }
