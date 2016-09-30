@@ -48,10 +48,7 @@ public class Controllers {
         long amount = (long)Double.parseDouble(pvmValues.get("amount").toString());
         String from = pvmValues.get("from").toString();
         String to = pvmValues.get("to").toString();
-        System.out.println(result);
         rep.addTransaction(userId, from, to, amount, result);
-        System.out.println(result);
-        System.out.println("Wazzup");
         return pvmValues;
 
     }

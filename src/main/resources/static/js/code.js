@@ -49,10 +49,7 @@ $(document).ready(function() {
                 result = accounting.formatMoney(result, " ", 2, ",", ".");
 
 
-                console.log(result);
-
-
-                $("ul.currencies").append("<li>" +  ffrom + " ->" + " " + fto+  " estimate: " + result + "</li>");
+                $("ul.currencies").append("<li>" + amount + " " + ffrom + " is "  + result + " " + fto + "</li>");
 
                 console.log(result);
                 dictController.from = ffrom;
