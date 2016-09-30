@@ -20,6 +20,18 @@ public class Controllers {
     @Autowired
     Repository rep;
 
+    @RequestMapping(method = RequestMethod.GET, path = "/gethistory")
+    public ModelAndView getHistory(@RequestParam String username) {
+        ModelAndView modelAndView = new ModelAndView("gethistory");
+
+        List<Transaction> trans = rep.listTransUser(username);
+        modelAndView.addObject("trans", trans);
+        return modelAndView;
+    }
+
+
+
+
     @RequestMapping(method = RequestMethod.GET, path = "/top5")
     public ModelAndView top5() {
         ModelAndView modelAndView = new ModelAndView("top5");

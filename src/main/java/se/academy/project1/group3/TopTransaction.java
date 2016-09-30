@@ -5,8 +5,8 @@ package se.academy.project1.group3;
  */
 public class TopTransaction {
 
-    long number;
-    String userName;
+    private long number;
+    private String userName;
 
     public TopTransaction(long number, String userName) {
         this.number = number;

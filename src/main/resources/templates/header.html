@@ -4,10 +4,15 @@
 <body>
 <div class="headMain">
     <div>
-    <a href="main" class="logo"><img src="krona.jpg"/></a>
-    <span th:text="${logged}"></span>
+        <a href="main" class="logo"><img src="krona.jpg"/></a>
+        <span th:text="${logged}"></span>
     </div>
-    <a href="logout" class="button headSubmit">Log out!</a>
+    <div>
+        <a class="button headSubmit" th:href="@{/gethistory(username=${logged})}">History User</a>
+    </div>
+    <div>
+        <a href="logout" class="button headSubmit">Log out!</a>
+    </div>
 </div>
 </body>
 </html>

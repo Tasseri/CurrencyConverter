@@ -48,6 +48,21 @@ public class SqlRepository implements Repository {
             throw new CurrencyConverterException(e);
         }
     }
+    public List<Transaction> listTransUser(String username) {
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT T.TransID, U.FirstName, U.LastName, U.UserName, T.CurrencyFrom, T.CurrencyTo, T.Amount, T.Result, T.Date FROM Transactions as T INNER JOIN Users as U ON T.User_ID = U.UserID WHERE U.UserName = ? ORDER BY T.Date DESC")){
+             ps.setString(1, username);
+
+            List<Transaction> transactions = new ArrayList<>();
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) transactions.add(rsTransaction(rs));
+            return transactions;
+        } catch (SQLException e) {
+            throw new CurrencyConverterException(e);
+        }
+    }
+
+
 
     public List<TopTransaction> topTransactions() {
         try (Connection conn = dataSource.getConnection();
