@@ -9,6 +9,7 @@ import java.util.List;
 public interface Repository {
     void addTransaction(long userID, String currencyFrom, String currencyTo, long amount, long result);
     List<Transaction> listTransactions();
+    List<TopTransaction> topTransactions();
     void addUser(String firstName, String lastName, String username, String password);
     boolean loginUser(String username, String password);
     List<Transaction> listTransUser(String username);
