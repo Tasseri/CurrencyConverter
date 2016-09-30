@@ -3,6 +3,8 @@
 </head>
 <body>
 <form action="logout" method="post">
+    <a class="button submit" th:href="@{/gethistory(username=${logged})}">History User</a>
+
     <span for="logOut" th:text="${logged}"></span>
     <button id="logOut" type="submit" class="headSubmit">Log out!</button>
 </form>

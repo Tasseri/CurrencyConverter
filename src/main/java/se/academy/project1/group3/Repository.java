@@ -11,4 +11,5 @@ public interface Repository {
     List<Transaction> listTransactions();
     void addUser(String firstName, String lastName, String username, String password);
     boolean loginUser(String username, String password);
+    List<Transaction> listTransUser(String username);
 }
